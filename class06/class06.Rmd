@@ -1,0 +1,174 @@
+---
+title: 'Class 6: R Functions'
+author: "Kendall Lin"
+date: "1/23/2020"
+output:
+  html_document: default
+  pdf_document: default
+  word_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+# Functions
+## Level 2 heading
+### Level 3 heading
+
+read.table("Your File Name", Header = True, sep = '\t')
+
+```{r}
+plot(1:5, typ = "l", col = "blue")
+```
+
+Lets see more about file import(i.e. reading files into R). The main read function in base R is `read.table()` 
+
+```{r}
+t1 <- read.table("test1.txt")
+```
+
+We need to add arguments to get this file imported
+
+```{r}
+t1<- read.table("test1.txt", header = T, sep = ",")
+```
+
+Or we could just use `read.csv()` which as the arguments I want in this case!
+
+```{r}
+t1<- read.csv("test1.txt")
+```
+
+```{r}
+t2<- read.table("test2.txt", sep= "$", header = T)
+```
+
+```{r}
+t3 <- read.table("test3.txt")
+```
+
+#Back to functions
+Out first example function:
+```{r}
+add <- function(x, y = 1){
+  #Sum the input x and y
+  x+y
+}
+```
+
+Works with vectors too
+
+```{r}
+add(c(1,2,3),c(1,2,9))
+```
+
+What is this `range()` function?
+```{r}
+x<- c(1,3,4,11)
+range(x)
+```
+
+
+```{r}
+rescale <- function(x) {
+ rng <-range(x, na.rm = T)
+ (x - rng[1]) / (rng[2] - rng[1])
+}
+rescale(c(1,2,NA,3, 10))
+```
+
+```{r}
+rescale3<- function(x, na.rm=TRUE, plot=FALSE) {
+  
+ rng <-range(x, na.rm=na.rm)
+ print("Hello")
+ 
+ answer <- (x - rng[1]) / (rng[2] - rng[1])
+ 
+ print("is it me you are looking for?")
+ 
+ if(plot) {
+ plot(answer, typ="b", lwd=4)
+ }
+ print("I can see it in ...")
+ return(answer)
+}
+```
+```{r}
+rescale3(x, plot = T)
+```
+
+```{r}
+library(bio3d)
+```
+
+Hands on Section B.
+```{r}
+library(bio3d)
+s1 <- read.pdb("4AKE") # kinase with drug
+s2 <- read.pdb("1AKE") # kinase no drug
+s3 <- read.pdb("1E4Y") # kinase with drug
+
+s1.chainA <- trim.pdb(s1, chain="A", elety="CA")
+s2.chainA <- trim.pdb(s2, chain="A", elety="CA")
+s3.chainA <- trim.pdb(s3, chain="A", elety="CA")
+
+s1.b <- s1.chainA$atom$b
+s2.b <- s2.chainA$atom$b
+s3.b <- s3.chainA$atom$b
+
+plotb3(s1.b, sse=s1.chainA, typ="l", ylab="Bfactor")
+plotb3(s2.b, sse=s2.chainA, typ="l", ylab="Bfactor")
+plotb3(s3.b, sse=s3.chainA, typ="l", ylab="Bfactor")
+```
+```{r}
+class(s1)
+str(s1)
+```
+
+
+```{r}
+s1$seqres
+```
+
+
+```{r}
+aa321(s1$seqres)
+```
+
+```{r}
+s1$atom
+```
+
+
+
+```{r}
+plotb3(s1.b, sse=s1.chainA, typ="l", ylab="Bfactor")
+points(s2.b, typ = "l", col = "blue", lwd= 1)
+points(s3.b, typ = "l", col = "red", lwd = 1)
+```
+
+```{r}
+hc <- hclust( dist( rbind(s1.b, s2.b, s3.b) ) )
+plot(hc)
+```
+
+
+Q1. What type of object is returned from the read.pdb() function?
+**returns a large list from protein database. Can tell it is a list by using str() function on s1, s2, or s3. It is a list of 8 things and of class "pdb"**
+
+Q2. What does the trim.pdb() function do?
+**Produces a new smaller PDB object, containing a subset of atoms, from a given larger PDB object**
+
+Q3. What input parameter would turn off the marginal black and grey rectangles in the plots and what do they represent in this case?
+**You can remove the elety="CA" to remove the black and grey rectangles. They represent a character vector of atom names**
+
+Q4. What would be a better plot to compare across the different proteins?
+**overlay the graphs using points()**
+
+Q5. Which proteins are more similar to each other in their B-factor trends. How could you quantify this? HINT: try the rbind(), dist() and hclust() functions together with a resulting dendrogram plot. Look up the documentation to see what each of these functions does.
+**s2 and s3 are closer to each other according to hclust(), rbind(), dist() function **
+
+Q6.  How would you generalize the original code above to work with any set of input protein structures?
+
+

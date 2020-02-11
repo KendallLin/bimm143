@@ -1,0 +1,41 @@
+---
+title: "Lecture 6 Lab Homework"
+author: "Kendall Lin"
+date: "1/23/2020"
+output:
+  pdf_document: default
+  html_document: default
+  word_document: default
+---
+  
+  ```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+#Load bio3d package into RStudio
+library(bio3d)
+
+#Create function that can be applied to any protein in PDB 
+#input for the function is protein identifier name
+#output for function is a line plot for protein atomic chain data
+protein_plot <- function(x){
+  
+  #read pdb file of input protein from protein database
+  protein_file <- read.pdb(x) 
+  
+  #produce a smaller pdb file with subset of specified atom chain
+  subset_chain <- trim.pdb(protein_file, chain="A", elety="CA")
+  
+  #Assign specified atom values in subset chain to variable
+  atom_values <- subset_chain$atom$b
+  
+  #Plot the specified atom values in line graph
+  plotb3(atom_values, sse=subset_chain, typ="l", ylab="Bfactor")
+}
+
+#examples for protein_plot() function 
+protein_plot("4AKE") #kinase with drug
+protein_plot("1AKE") #kinase with no drug
+protein_plot("1E4Y") #kinase with drug
+```

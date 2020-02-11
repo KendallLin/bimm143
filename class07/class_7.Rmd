@@ -1,0 +1,170 @@
+---
+title: ''
+author: "Kendall Lin"
+date: "1/28/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+These are functions here
+```{r}
+
+is_both_na<- function(x,y) {
+  if(length(x) != length (y)){
+    stop("your inputs aren't the same length")
+  }
+  is.na(x) & is.na(y)
+}
+
+
+rescale_new<- function(x,y) {
+  ##Print some info on where NA's are as well as the number of them
+  if(length(x) != length (y)){
+    stop("your inputs aren't the same length")
+  }
+  na.in.both <- (is.na(x) & is.na(y))
+  na.number <- sum(na.in.both)
+  na.which <- which(na.in.both)
+  
+  
+  
+  message("Found ", na.number, " NA's at position(s):",
+          paste(na.which, collapse = ", "))
+  
+  return(list(number=na.number, which = na.which))
+}
+
+
+rescale <- function(x, na.rm=TRUE, plot=FALSE, ...) {
+  # Our rescale function from the end of lecture 9
+  if( !is.numeric(x) ) {
+ stop("Input x should be numeric", call.=FALSE)
+  }
+  
+  if(na.rm) {
+    rng <-range(x, na.rm=TRUE)
+  } else {
+    rng <-range(x)
+  }
+
+  answer <- (x - rng[1]) / (rng[2] - rng[1])
+  if(plot) { 
+    plot(answer, ...) 
+  }
+  return(answer)
+}
+rescale(c(1:10,"hi"))
+```
+```{r}
+# Lets define an example x and y
+x <- c( 1, 2, NA, 3, NA)
+y <- c(NA, 3, NA, 3, 4)
+z <- c(1,2)
+is.na(x)
+sum(is.na(x))
+is.na(y)
+sum(is.na(y))
+#custom function is_both_na to run both 
+is_both_na(x,y)
+sum(is_both_na(x,y))
+#created a custom stop message in is_both_na function above
+is_both_na(x,z)
+```
+
+```{r}
+x<- df1$IDs
+y<- df2$IDs
+#check if these two data frame have similar genes
+intersect(x,y)
+#tells us where the overlap is in the vector with logical output
+x %in% y 
+x[x %in% y] #this outputs only the true values
+
+y %in% x
+y[y%in%x]
+
+cbind(x[x %in% y], y[y%in%x])
+
+```
+```{r}
+gene_intersect <- function(x, y) {
+  cbind(x[x %in% y], y[y%in%x])
+}
+
+gene_intersect2 <- function(df1, df2) {
+  cbind(df1[df1$IDs %in% df2$IDs, ],
+        df2[df2$IDs %in% df1$IDs, ], "exp")
+}
+
+gene_intersect3 <- function(df1, df2, gene.colname= "IDs") {
+  
+  cbind(df1[df1[,gene.colname] %in% df2[,gene.colname], ],
+        df2[df2[,gene.colname] %in% df1[,gene.colname], ], "exp")
+}
+
+
+x<- df1$IDs
+y<- df2$IDs
+gene_intersect(x,y)
+colnames(df1) <- c("IDs", "exp")
+colnames(df2) <- c("IDs", "exp")
+
+#all of these are the same
+df1$IDs
+df1[,"IDs"]
+gene.colname = "IDs"
+df1[, gene.colname]
+
+
+gene_intersect2(df1,df2)
+
+gene_intersect3(df1, df2, gene.colname= "IDs")
+
+
+#make the code look cleaner
+gene_intersect4<- function(df1, df2, gene.colname= "IDs") {
+  df1.name <- df1[, gene.colname]
+  df2.name <- df2[, gene.colname]
+  
+  df1.inds <- df1.name %in% df2.name
+  df2.inds <- df2.name %in% df1.name
+  
+  cbind(df1[df1.inds,],
+        df2[df2.inds,], "exp")
+}
+gene_intersect4(df1,df2, gene.colname = "IDs" )
+```
+
+```{r}
+library(ggplot2)
+dim(iris)
+class(iris)
+head(iris)
+levels(iris$Species)
+
+
+##Aesthetics-> what do you want to plot in x and y 
+myplot<- ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width))
+class(myplot)
+
+##Geometry -> geometric objects in the plot
+ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width)) + geom_point()
+
+ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width)) + geom_point(size = 3)
+
+ggplot(data = iris, aes(Sepal.Length, Sepal.Width, color = Species)) + geom_point(size = 3)
+
+ggplot(data = iris, aes(Sepal.Length, Sepal.Width, color = Species)) + geom_point(aes(shape = Species), size = 3)
+
+ggplot(data = iris, aes(Sepal.Length, Sepal.Width, color = Species)) + geom_point(aes(shape = Species), size = 3) + geom_smooth(method = "lm")
+
+#Distribution of sepal length
+ggplot(iris, aes(Sepal.Length, fill = Species)) + geom_bar(stat = 'count')
+
+```
+
+
+

@@ -50,4 +50,9 @@ library(bio3d.view)
 view(lig)
 ```
 
+Read docking results
+```{r}
+res <- read.pdb("all.pdbqt", multi=TRUE)
+write.pdb(res, "results.pdb")
+```
 

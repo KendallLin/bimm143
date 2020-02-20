@@ -1,0 +1,65 @@
+---
+title: "Untitled"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+The data for this hands-on session comes from a published RNA-seq experiment where airway smooth muscle cells were treated with dexamethasone, a synthetic glucocorticoid steroid with anti-inflammatory effects (Himes et al. 2014).
+
+Glucocorticoids are used, for example, by people with asthma to reduce inflammation of the airways. The anti-inflammatory effects on airway smooth muscle (ASM) cells has been known for some time but the underlying molecular mechanisms are unclear.
+
+
+```{r}
+counts <- read.csv("airway_scaledcounts.csv", stringsAsFactors = FALSE)
+
+metadata <-  read.csv("airway_metadata.csv", stringsAsFactors = FALSE)
+```
+
+How many genes are we dealing with?
+```{r}
+nrow(counts)
+```
+
+
+We want to calculate the average counts per gene for control samples and for the drug treated samples. We will then compare these values to see if there is a difference overall between control and treated samples for a given gene.
+
+
+This is our `metadata` info that tells me where our control and treated samples are (i.e. which columns in `counts`)
+```{r}
+metadata
+```
+
+Now I want access to the control only rows in the metadata
+```{r}
+# metadata$id[metadata$dex == "control"] is one way to find it
+control <- metadata[metadata$dex == "control",]
+```
+
+Now use the $id of the control data to access the control columns in `counts` and calculate the average. `nrow()` function tells use number of samples in control. 
+```{r}
+control.mean <- rowSums(counts[ ,control$id]) / nrow(control)
+names(control.mean) <- counts$ensgene
+```
+
+Now lets do the same for *treated* samples
+```{r}
+treated <- metadata[metadata$dex == "treated", ]
+treated.mean <- rowSums(counts[ , treated$id])/nrow(treated)
+```
+We will combine our meancount data for bookeeping purposes. 
+```{r}
+meancounts <- data.frame(control.mean, treated.mean)
+meancounts
+```
+
+```{r}
+plot(meancounts)
+```
+
+Lets make this plot on a log scale to keep dots from bunching
+```{r}
+plot(meancounts, log= "xy")
+```

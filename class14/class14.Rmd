@@ -63,3 +63,95 @@ Lets make this plot on a log scale to keep dots from bunching
 ```{r}
 plot(meancounts, log= "xy")
 ```
+
+Here we calculate log2foldchange, add it to our meancounts data.frame and inspect the results either with the head() or the View() function for example.
+```{r}
+meancounts$log2fc <-
+    log2(meancounts[,"treated.mean"]/meancounts[,"control.mean"])
+    head(meancounts)
+```
+
+Remove any gene that has zero average counts.
+```{r}
+#example of which() function and arr.ind
+x <- data.frame(c(1,1,10,0), c(0,1,10,0))
+x == 0 
+which(x==0, arr.ind = T)
+ind <- unique(which(x==0, arr.ind = T)[, "row"])
+x[ind,]
+```
+
+```{r}
+zero.vals <- which(meancounts[,1:2]==0, arr.ind=TRUE)
+
+to.rm <- unique(zero.vals[,1])
+mycounts <- meancounts[-to.rm,]
+head(mycounts)
+```
+
+How many genes do I have left?
+```{r}
+nrow(mycounts)
+```
+A common threshold used for calling something differentially expressed is a log2(FoldChange) of greater than 2 or less than -2. Let’s filter the dataset both ways to see how many genes are up or down-regulated.
+
+```{r}
+up.ind <- mycounts$log2fc > 2
+down.ind <- mycounts$log2fc < (-2)
+```
+
+```{r}
+sum(up.ind)
+sum(down.ind)
+```
+
+##Do this properly with DESeq2
+```{r}
+library(DESeq2)
+citation("DESeq2")
+```
+
+Setup inputs for DESeq by specifying countdata, metadata, and the design(i.e. which comparisons we are interested in)
+```{r}
+dds <- DESeqDataSetFromMatrix(countData=counts, 
+                              colData=metadata, 
+                              design=~dex, 
+                              tidy=TRUE)
+dds
+```
+
+```{r}
+dds <- DESeq(dds)
+res <- results(dds)
+```
+
+```{r}
+plot(res$log2FoldChange, res$padj)
+```
+```{r}
+plot(res$log2FoldChange, log(res$padj))
+```
+
+Let's plot this upright like everyone else does
+```{r}
+plot(res$log2FoldChange, -log(res$padj))
+```
+
+```{r}
+# Setup our custom point color vector 
+mycols <- rep("gray", nrow(res))
+redchecker <- abs(res$log2FoldChange) > 2 
+mycols[redchecker]  <- "red" 
+
+bluechecker <- (res$padj < 0.01) & (abs(res$log2FoldChange) > 2 )
+mycols[bluechecker] <- "blue"
+
+#Volcano plot with custom colors 
+plot( res$log2FoldChange,  -log(res$padj), 
+ col=mycols, ylab="-Log(P-value)", xlab="Log2(FoldChange)" )
+
+abline(v=c(-2,2), col="gray", lty=2)
+abline(h=-log(0.1), col="gray", lty=2)
+```
+
+

@@ -1,0 +1,175 @@
+---
+title: "testing"
+output: github_document
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+##Connect to the NCi-GDC database
+The NCI-GDC (cancer genomics commons) is a major portal for cancer genomics data.
+Here we use the bioconductor package
+
+```{r}
+library(GenomicDataCommons)
+library(TCGAbiolinks)
+library(maftools)
+```
+
+```{r}
+status()
+```
+
+```{r}
+projects <- getGDCprojects()
+head(projects)
+```
+
+
+```{r}
+cases_by_project <- cases() %>%
+  facet("project.project_id") %>%
+  aggregations()
+head(cases_by_project)
+```
+
+```{r}
+x <- cases_by_project$project.project_id
+
+# Make a custom color vector for our plot
+colvec <- rep("lightblue", nrow(x))
+b <- colvec[x$key] == T <- "red"
+
+# Plot with 'log' for y axis and rotate labels with 'las'
+#par(___)  
+barplot(x$doc_count, names.arg= x$key, log="y", col=colvec, las=2)
+```
+
+##Variant analysis with R
+
+Find files available for PAAD project that we can then excamine variants from
+
+```{r}
+maf.file <- GDCquery_Maf(tumor="PAAD", pipelines = "mutect")
+head(maf.file)
+```
+
+Read in the MAF file we found
+```{r}
+vars = read.maf(maf = maf.file, verbose = FALSE)
+```
+
+Now make a summary plot of this data
+```{r}
+plotmafSummary(vars)
+```
+
+## Oncoplots
+
+```{r}
+oncoplot(maf = vars, top = 10)
+```
+```{r}
+# Oncoplot for our top 10 most frequently mutated genes
+pdf("oncoplot_panc.pdf")
+oncoplot(maf = vars, top = 10, fontSize = 12)
+dev.off()
+```
+
+```{r}
+oncostrip(maf=vars, genes=c("KRAS", "TP53"))
+
+```
+```{r}
+blah <- read.fasta("muscle-I20200305-191342-0906-29976761-p1m.clw")
+```
+
+```{r}
+ide <- conserv(blah$ali, method="identity")
+mutant.sites <- which(ide < 1) 
+
+## Exclude gap possitions from analysis
+gaps <- gap.inspect(blah)
+mutant.sites <- mutant.sites[mutant.sites %in% gaps$f.inds]
+
+mutant.sites
+```
+
+Find the -8 before and the +8 after (i.e. all possible 9-mer)
+```{r}
+start.position <- mutant.sites - 8
+end.position <- mutant.sites +8
+```
+
+
+```{r}
+
+lmao$ali[2,start.position[1]:end.position[1]]
+mutant.sites +8
+## Make a "names" label for our output sequences (one per mutant)
+mutant.names <- paste0(lmao$ali["P53_wt",mutant.sites],
+                       mutant.sites,
+                       lmao$ali["P53_mutant",mutant.sites])
+
+mutant.names
+# Blank matrix to store sub-sequences
+store.seqs <- matrix("-", nrow=length(mutant.sites), ncol=17)
+rownames(store.seqs) <- mutant.names
+
+## Extract each sub-sequence
+for(i in 1:length(mutant.sites)) {
+  store.seqs[i,] <- lmao$ali["P53_mutant",start.position[i]:end.position[i]]
+}
+
+store.seqs
+## Output a FASTA file for further analysis
+write.fasta(seqs=store.seqs, ids=mutant.names, file="mutantseqs.fa", gap = F)
+```
+
+
+```{r}
+asdf <- lmao$ali
+wingo <- asdf[1,] %in% asdf[2,]
+wingo
+```
+
+```{r}
+lmao[[asdf]]
+```
+
+
+```{r}
+library(bio3d)
+aligned_file <- read.fasta("alignmentsavefile")
+aligned_matrix <- seqidentity(aligned_file)
+png(filename="heatmap.png", width = 700, height = 700, pointsize = 14)
+heatmap(aligned_matrix, margins= c(12,12))
+```
+
+```{r}
+library(bio3d)
+```
+
+```{r}
+wombat_seq <- c("MAPWLTALSLTVLLALSSPPAGEALVNQHLCGSHLVEALYLVCGERGFFYTPKARRDAEQPLLGEARGEELPFPPEYQLQKRGIVEQCCNSICSLYQLETYCN")
+blast.pdb(wombat_seq, database = "pdb", time.out = NULL, chain.single=TRUE)
+```
+```{r}
+plot(bb[["raw"]][["identity"]], bb$hit.tbl$subjectids)
+```
+
+
+```{r}
+gg<- bb$raw$subjectid
+wee <- pdb.annotate(gg, anno.terms = c("structureId", "experimentalTechnique", "resolution", "source"))
+apply(aligned_matrix, 1, FUN=max)
+```
+
+```{r}
+c <- cbind(wee, bb$hit.tbl$evalue, bb$hit.tbl$identity)
+bb$hit.tbl
+```

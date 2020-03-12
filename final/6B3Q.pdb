@@ -1,0 +1,153 @@
+HEADER    HYDROLASE/HORMONE                       22-SEP-17   6B3Q              
+TITLE     CRYO-EM STRUCTURE OF HUMAN INSULIN DEGRADING ENZYME IN COMPLEX WITH   
+TITLE    2 INSULIN                                                              
+COMPND    MOL_ID: 1;                                                            
+COMPND   2 MOLECULE: INSULIN-DEGRADING ENZYME;                                  
+COMPND   3 CHAIN: A, B;                                                         
+COMPND   4 FRAGMENT: RESIDUES 42-1019;                                          
+COMPND   5 SYNONYM: ABETA-DEGRADING PROTEASE,INSULIN PROTEASE,INSULINASE,       
+COMPND   6 INSULYSIN;                                                           
+COMPND   7 EC: 3.4.24.56;                                                       
+COMPND   8 ENGINEERED: YES;                                                     
+COMPND   9 MOL_ID: 2;                                                           
+COMPND  10 MOLECULE: INSULIN;                                                   
+COMPND  11 CHAIN: a, b;                                                         
+COMPND  12 ENGINEERED: YES                                                      
+SOURCE    MOL_ID: 1;                                                            
+SOURCE   2 ORGANISM_SCIENTIFIC: HOMO SAPIENS;                                   
+SOURCE   3 ORGANISM_COMMON: HUMAN;                                              
+SOURCE   4 ORGANISM_TAXID: 9606;                                                
+SOURCE   5 GENE: IDE;                                                           
+SOURCE   6 EXPRESSION_SYSTEM: ESCHERICHIA COLI;                                 
+SOURCE   7 EXPRESSION_SYSTEM_TAXID: 562;                                        
+SOURCE   8 MOL_ID: 2;                                                           
+SOURCE   9 ORGANISM_SCIENTIFIC: HOMO SAPIENS;                                   
+SOURCE  10 ORGANISM_COMMON: HUMAN;                                              
+SOURCE  11 ORGANISM_TAXID: 9606;                                                
+SOURCE  12 GENE: INS;                                                           
+SOURCE  13 EXPRESSION_SYSTEM: ESCHERICHIA COLI;                                 
+SOURCE  14 EXPRESSION_SYSTEM_TAXID: 562                                         
+KEYWDS    IDE, INSULIN DEGRADING ENZYME, AMYLOID BETA, HYDROLASE-HORMONE        
+KEYWDS   2 COMPLEX                                                              
+EXPDTA    ELECTRON MICROSCOPY                                                   
+AUTHOR    W.G.LIANG,Z.ZHANG,L.J.BAILEY,A.A.KOSSIAKOFF,Y.Z.TAN,H.WEI,            
+AUTHOR   2 B.CARRAGHER,S.C.POTTER,W.J.TANG                                      
+REVDAT   5   01-JAN-20 6B3Q    1       REMARK                                   
+REVDAT   4   18-JUL-18 6B3Q    1       REMARK                                   
+REVDAT   3   11-APR-18 6B3Q    1       JRNL                                     
+REVDAT   2   06-DEC-17 6B3Q    1       REMARK                                   
+REVDAT   1   22-NOV-17 6B3Q    0                                                
+JRNL        AUTH   Z.ZHANG,W.G.LIANG,L.J.BAILEY,Y.Z.TAN,H.WEI,A.WANG,           
+JRNL        AUTH 2 M.FARCASANU,V.A.WOODS,L.A.MCCORD,D.LEE,W.SHANG,              
+JRNL        AUTH 3 R.DEPREZ-POULAIN,B.DEPREZ,D.R.LIU,A.KOIDE,S.KOIDE,           
+JRNL        AUTH 4 A.A.KOSSIAKOFF,S.LI,B.CARRAGHER,C.S.POTTER,W.J.TANG          
+JRNL        TITL   ENSEMBLE CRYOEM ELUCIDATES THE MECHANISM OF INSULIN CAPTURE  
+JRNL        TITL 2 AND DEGRADATION BY HUMAN INSULIN DEGRADING ENZYME.           
+JRNL        REF    ELIFE                         V.   7       2018              
+JRNL        REFN                   ESSN 2050-084X                               
+JRNL        PMID   29596046                                                     
+JRNL        DOI    10.7554/ELIFE.33572                                          
+REMARK   2                                                                      
+REMARK   2 RESOLUTION.    3.70 ANGSTROMS.                                       
+REMARK   3                                                                      
+REMARK   3 REFINEMENT.                                                          
+REMARK   3   SOFTWARE PACKAGES      : DOG PICKER, LEGINON, GCTF, COOT, UCSF     
+REMARK   3                            CHIMERA, RELION, RELION, RELION, RELION,  
+REMARK   3                            PHENIX                                    
+REMARK   3   RECONSTRUCTION SCHEMA  : FOURIER SPACE                             
+REMARK   3                                                                      
+REMARK   3 EM MAP-MODEL FITTING AND REFINEMENT                                  
+REMARK   3   PDB ENTRY                    : NULL                                
+REMARK   3   REFINEMENT SPACE             : REAL                                
+REMARK   3   REFINEMENT PROTOCOL          : FLEXIBLE FIT                        
+REMARK   3   REFINEMENT TARGET            : NULL                                
+REMARK   3   OVERALL ANISOTROPIC B VALUE  : 92.000                              
+REMARK   3                                                                      
+REMARK   3 FITTING PROCEDURE : NULL                                             
+REMARK   3                                                                      
+REMARK   3 EM IMAGE RECONSTRUCTION STATISTICS                                   
+REMARK   3   NOMINAL PIXEL SIZE (ANGSTROMS)    : NULL                           
+REMARK   3   ACTUAL PIXEL SIZE  (ANGSTROMS)    : NULL                           
+REMARK   3   EFFECTIVE RESOLUTION (ANGSTROMS)  : 3.700                          
+REMARK   3   NUMBER OF PARTICLES               : 116122                         
+REMARK   3   CTF CORRECTION METHOD             : PHASE FLIPPING AND AMPLITUDE   
+REMARK   3                                       CORRECTION                     
+REMARK   3                                                                      
+REMARK   3 EM RECONSTRUCTION MAGNIFICATION CALIBRATION: NULL                    
+REMARK   3                                                                      
+REMARK   3 OTHER DETAILS: NULL                                                  
+REMARK   4                                                                      
+REMARK   4 6B3Q COMPLIES WITH FORMAT V. 3.30, 13-JUL-11                         
+REMARK 100                                                                      
+REMARK 100 THIS ENTRY HAS BEEN PROCESSED BY RCSB ON 25-SEP-17.                  
+REMARK 100 THE DEPOSITION ID IS D_1000229772.                                   
+REMARK 245                                                                      
+REMARK 245 EXPERIMENTAL DETAILS                                                 
+REMARK 245   RECONSTRUCTION METHOD          : SINGLE PARTICLE                   
+REMARK 245   SPECIMEN TYPE                  : NULL                              
+REMARK 245                                                                      
+REMARK 245 ELECTRON MICROSCOPE SAMPLE                                           
+REMARK 245   SAMPLE TYPE                    : PARTICLE                          
+REMARK 245   PARTICLE TYPE                  : POINT                             
+REMARK 245   NAME OF SAMPLE                 : INSULIN DEGRADING                 
+REMARK 245                                    ENZYME/INSULIN                    
+REMARK 245   SAMPLE CONCENTRATION (MG ML-1) : 0.30                              
+REMARK 245   SAMPLE SUPPORT DETAILS         : NULL                              
+REMARK 245   SAMPLE VITRIFICATION DETAILS   : THE CRYO GRIDS WERE MADE USING    
+REMARK 245                                    SPOTITON AND HOMEMADE PLUNGER     
+REMARK 245   SAMPLE BUFFER                  : NULL                              
+REMARK 245   PH                             : 7.80                              
+REMARK 245   SAMPLE DETAILS                 : CRYO-EM STRUCTURE OF HUMAN        
+REMARK 245  INSULIN DEGRADING ENZYME IN COMPLEX WITH INSULIN                    
+REMARK 245                                                                      
+REMARK 245 DATA ACQUISITION                                                     
+REMARK 245   DATE OF EXPERIMENT                : NULL                           
+REMARK 245   NUMBER OF MICROGRAPHS-IMAGES      : 3085                           
+REMARK 245   TEMPERATURE (KELVIN)              : NULL                           
+REMARK 245   MICROSCOPE MODEL                  : FEI TITAN KRIOS                
+REMARK 245   DETECTOR TYPE                     : GATAN K2 SUMMIT (4K X 4K)      
+REMARK 245   MINIMUM DEFOCUS (NM)              : 940.00                         
+REMARK 245   MAXIMUM DEFOCUS (NM)              : 2200.00                        
+REMARK 245   MINIMUM TILT ANGLE (DEGREES)      : NULL                           
+REMARK 245   MAXIMUM TILT ANGLE (DEGREES)      : NULL                           
+REMARK 245   NOMINAL CS                        : 2.70                           
+REMARK 245   IMAGING MODE                      : BRIGHT FIELD                   
+REMARK 245   ELECTRON DOSE (ELECTRONS NM**-2)  : 71.40                          
+REMARK 245   ILLUMINATION MODE                 : FLOOD BEAM                     
+REMARK 245   NOMINAL MAGNIFICATION             : 22500                          
+REMARK 245   CALIBRATED MAGNIFICATION          : 46598                          
+REMARK 245   SOURCE                            : FIELD EMISSION GUN             
+REMARK 245   ACCELERATION VOLTAGE (KV)         : 300                            
+REMARK 245   IMAGING DETAILS                   : NULL                           
+REMARK 247                                                                      
+REMARK 247 ELECTRON MICROSCOPY                                                  
+REMARK 247  THE COORDINATES IN THIS ENTRY WERE GENERATED FROM ELECTRON          
+REMARK 247  MICROSCOPY DATA. PROTEIN DATA BANK CONVENTIONS REQUIRE              
+REMARK 247  THAT CRYST1 AND SCALE RECORDS BE INCLUDED, BUT THE VALUES           
+REMARK 247  ON THESE RECORDS ARE MEANINGLESS EXCEPT FOR THE CALCULATION         
+REMARK 247  OF THE STRUCTURE FACTORS.                                           
+REMARK 300                                                                      
+REMARK 300 BIOMOLECULE: 1, 2                                                    
+REMARK 300 SEE REMARK 350 FOR THE AUTHOR PROVIDED AND/OR PROGRAM                
+REMARK 300 GENERATED ASSEMBLY INFORMATION FOR THE STRUCTURE IN                  
+REMARK 300 THIS ENTRY. THE REMARK MAY ALSO PROVIDE INFORMATION ON               
+REMARK 300 BURIED SURFACE AREA.                                                 
+REMARK 350                                                                      
+REMARK 350 COORDINATES FOR A COMPLETE MULTIMER REPRESENTING THE KNOWN           
+REMARK 350 BIOLOGICALLY SIGNIFICANT OLIGOMERIZATION STATE OF THE                
+REMARK 350 MOLECULE CAN BE GENERATED BY APPLYING BIOMT TRANSFORMATIONS          
+REMARK 350 GIVEN BELOW.  BOTH NON-CRYSTALLOGRAPHIC AND                          
+REMARK 350 CRYSTALLOGRAPHIC OPERATIONS ARE GIVEN.                               
+REMARK 350                                                                      
+REMARK 350 BIOMOLECULE: 1                                                       
+REMARK 350 AUTHOR DETERMINED BIOLOGICAL UNIT: DIMERIC                           
+REMARK 350 APPLY THE FOLLOWING TO CHAINS: A, a                                  
+REMARK 350   BIOMT1   1  1.000000  0.000000  0.000000        0.00000            
+REMARK 350   BIOMT2   1  0.000000  1.000000  0.000000        0.00000            
+REMARK 350   BIOMT3   1  0.000000  0.000000  1.000000        0.00000            
+REMARK 350                                                                      
+REMARK 350 BIOMOLECULE: 2                                                       
+REMARK 350 AUTHOR DETERMINED BIOLOGICAL UNIT: DIMERIC                           
+REMARK 350 APPLY THE FOLLOWING TO CHAINS: B, b                                  
+REMARK 350   BIOMT1   1  1.000000  0.000000  0.000000        0.00000            
+REMARK 350   BIOMT2   1  0.000000  1.000000  0.000000        0.00000

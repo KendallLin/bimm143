@@ -1,0 +1,76 @@
+---
+title: "Untitled"
+author: "Kendall Lin"
+date: "3/5/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+```
+
+```{r}
+library(bio3d)
+aligned_file <- read.fasta("Icandoit")
+aligned_matrix <- seqidentity(aligned_file, normalize=TRUE, similarity=FALSE, ncore=1, nseg.scale=1)
+png(filename="heatmap.png", width = 700, height = 700, pointsize = 14)
+heatmap(aligned_matrix, margins= c(12,12))
+```
+
+
+```{r}
+matrixsum <- rowSums(aligned_matrix)
+matrixsum
+```
+```{r}
+ok<- consensus(aligned_file)
+boots <- toString(ok$seq)
+toast<- gsub(", ", "", boots)
+toast
+#eleseq
+```
+
+
+```{r}
+eleseq <- c("MALWTRLLPLLALLAVGAPPPARAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREVEDTQVGEVELGTGLQPFPAEAPKQKRGIVEQCCTGVCSLYQLENYCN")
+eleblast <- blast.pdb(eleseq, database = "pdb", time.out = NULL, chain.single=TRUE)
+```
+
+
+
+```{r}
+selectdata<- eleblast$raw$subjectid
+annotate <- pdb.annotate(selectdata, anno.terms = c("structureId", "experimentalTechnique", "resolution", "source"))
+```
+
+
+```{r}
+Evalue <- eleblast$hit.tbl$evalue
+Identity <- eleblast$hit.tbl$identity
+been <- cbind(annotate, Evalue , Identity )
+eleblast$hit.tbl
+```
+
+```{r}
+chosen_id <- c("6B3Q_a", "1ZEI_A", "1APH_B")
+annotate2 <- pdb.annotate(chosen_id, anno.terms = c("structureId", "experimentalTechnique", "resolution", "source" ))
+cleantable <- been[chosen_id,]
+cleantable
+```
+
+```{r}
+file.name <- get.pdb("1aph_B")
+```
+
+```{r}
+insulin <- read.pdb(file.name)
+```
+
+```{r}
+prot <- trim.pdb(insulin, "protein")
+lig <- trim.pdb(insulin, "ligand")
+write.pdb(prot, file="insulin_protein.pdb")
+write.pdb(lig, file="insulin_ligand.pdb")
+```
+

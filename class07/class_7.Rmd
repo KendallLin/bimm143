@@ -2,7 +2,7 @@
 title: ''
 author: "Kendall Lin"
 date: "1/28/2020"
-output: html_document
+output: github_document
 ---
 
 ```{r setup, include=FALSE}
@@ -56,7 +56,7 @@ rescale <- function(x, na.rm=TRUE, plot=FALSE, ...) {
   }
   return(answer)
 }
-rescale(c(1:10,"hi"))
+#rescale(c(1:10,"hi"))
 ```
 ```{r}
 # Lets define an example x and y
@@ -71,7 +71,7 @@ sum(is.na(y))
 is_both_na(x,y)
 sum(is_both_na(x,y))
 #created a custom stop message in is_both_na function above
-is_both_na(x,z)
+#is_both_na(x,z)
 ```
 
 ```{r}

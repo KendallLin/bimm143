@@ -16,7 +16,7 @@ metaFile <- "GSE37704_metadata.csv"
 countFile <- "GSE37704_featurecounts.csv"
 
 # Import metadata and take a peak
-colData = read.csv(GSE37704_metadata.csv, row.names=1)
+colData = read.csv("GSE37704_metadata.csv", row.names=1)
 head(colData)
 ```
 

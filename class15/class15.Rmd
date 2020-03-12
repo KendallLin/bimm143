@@ -5,6 +5,9 @@ date: "2/25/2020"
 output: html_document
 ---
 
+Galaxy user: kolin
+      pass : kolin1
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```

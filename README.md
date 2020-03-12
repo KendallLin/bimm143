@@ -4,3 +4,4 @@ This is my classwork from [BIMM-143](https://bioboot.github.io/bimm143_W20/) win
 ## Content
 - Class05: [hi]
 - class06: [po]
+- Class10: Testing Dimensional Datasets (https://github.com/KendallLin/bimm143/blob/master/class10/class10.md)

@@ -3,3 +3,4 @@
 This is my classwork from [BIMM-143](https://bioboot.github.io/bimm143_W20/) winter quarter 2020 at UC San Diego.
 ## Content
 - Class05: [hi]
+- class06: [po]
